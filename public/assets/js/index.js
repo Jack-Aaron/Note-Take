@@ -1,8 +1,4 @@
-const $noteTitle = $(".note-title");
-const $noteText = $(".note-textarea");
-const $saveNoteBtn = $(".save-note");
-const $newNoteBtn = $(".new-note");
-const $noteList = $(".list-container .list-group");
+$(document).ready(function(){
 
 // Dependencies
 // =============================================================
@@ -13,11 +9,6 @@ var path = require("path");
 // =============================================================
 var app = express();
 var PORT = 3000;
-
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.set('port', process.env.PORT || 3000);
 
 // Routes
 // =============================================================
@@ -31,6 +22,17 @@ app.get("/notes", function(req, res) {
   res.sendFile(path.join(__dirname, "/public/assets/notes.html"));
 });
 
+
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// app.set('port', process.env.PORT || 3000);
+
+const $noteTitle = $(".note-title");
+const $noteText = $(".note-textarea");
+const $saveNoteBtn = $(".save-note");
+const $newNoteBtn = $(".new-note");
+const $noteList = $(".list-container .list-group");
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
@@ -183,3 +185,4 @@ getAndRenderNotes();
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
 });
+})
