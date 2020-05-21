@@ -4,7 +4,9 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-var notesData = require("../db/db.json");
+var notesData = require("../db/notesData.js");
+var fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 // ===============================================================================
 // ROUTING
@@ -37,10 +39,12 @@ module.exports = function (app) {
         // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
         // It will do this by sending out the value "true" have a table
         // req.body is available since we're using the body parsing middleware
-            notesData.push(req.body);
 
-            //these lines break the alerts
-            res.json(true);
+        req.body.id = uuidv4();
+        notesData.push(req.body);
+
+        //these lines break the alerts
+        res.json(true);
         // else {
         //   waitListData.push(req.body);
         //   console.log(req.body);
@@ -52,10 +56,13 @@ module.exports = function (app) {
     // ---------------------------------------------------------------------------
     // I added this below code so you could clear out the table while working with the functionality.
     // Don"t worry about it!
-
-    app.delete("/api/notes/:id", function (req, res, id) {
+    
+    app.delete("/api/notes/:id", function (req, res) {
         // Empty out the arrays of data
-        notesData;
+        let noteId = req.params.id;
+        notesData = notesData.filter(note =>
+            note.id !== noteId
+        );
         // waitListData;
 
         res.json({ ok: true });
