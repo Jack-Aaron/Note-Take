@@ -16,6 +16,22 @@ app.use(express.json());
 //static for Heroku
 app.use(express.static("public"));
 
+// write notes???
+// function renderNotes(req, res) {
+//   fs.readFile(__dirname + "/db/db.json", function(err, data) {
+//     if (err) {
+//       res.writeHead(500, { "Content-Type": "text/html" });
+//       res.end("<html><head><title>Oops</title></head><body><h1>Oops, there was an error</h1></html>");
+//     }
+//     else {
+//       // We then respond to the client with the HTML page by specifically telling the browser that we are delivering
+//       // an html file.
+//       res.writeHead(200, { "Content-Type": "text/html" });
+//       res.end(data);
+//     }
+//   });
+// }
+
 // Routes
 // =============================================================
 

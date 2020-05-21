@@ -4,7 +4,7 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-var notesData = require("../db/notesData");
+var notesData = require("../db/db.json");
 
 // ===============================================================================
 // ROUTING
@@ -53,7 +53,7 @@ module.exports = function (app) {
     // I added this below code so you could clear out the table while working with the functionality.
     // Don"t worry about it!
 
-    app.delete("/api/clear", function (req, res) {
+    app.delete("/api/notes/:id", function (req, res, id) {
         // Empty out the arrays of data
         notesData;
         // waitListData;
